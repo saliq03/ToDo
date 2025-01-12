@@ -1,5 +1,8 @@
 
 import 'package:get_it/get_it.dart';
+import 'package:todo/business/repository/task/task.dart';
+import 'package:todo/data/repository/task/task.dart';
+import 'package:todo/data/sources/tasks/tasks_firebase_service.dart';
 
 import 'business/repository/auth/auth.dart';
 
@@ -23,6 +26,10 @@ Future<void> initializeDependencies()async{
 
   sL.registerSingleton<SigninWithEmailPasswordUseCase>(
       SigninWithEmailPasswordUseCase());
+  sL.registerSingleton<TasksFirebaseService>(
+      TasksFirebaseServiceImpl());
+  sL.registerSingleton<TaskRepository>(
+    TaskRepositoryImpl());
 
 
 }

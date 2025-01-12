@@ -7,18 +7,20 @@ class AuthEvent extends Equatable{
 
 class SignUpWithEmailAndPassword extends AuthEvent{
   final String email,password;
+  final BuildContext context;
 
-  SignUpWithEmailAndPassword({required this.email, required this.password});
+  SignUpWithEmailAndPassword({required this.email, required this.password,required this.context});
 
   @override
-  List<Object?> get props => [email,password];
+  List<Object?> get props => [email,password,context];
 }
 
 class SignInWithEmailAndPassword extends AuthEvent{
   final String email,password;
+  final BuildContext context;
 
-  SignInWithEmailAndPassword({required this.email, required this.password});
+  SignInWithEmailAndPassword({required this.email, required this.password,required this.context});
 
   @override
-  List<Object?> get props => [email,password];
+  List<Object?> get props => [email,password,context];
 }

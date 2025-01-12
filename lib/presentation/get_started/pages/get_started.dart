@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/configs/assets/app_images.dart';
+import 'package:todo/data/sources/user_prefrence/user_prefrence.dart';
 import 'package:todo/presentation/auth/pages/sign_in.dart';
 import 'package:todo/presentation/auth/pages/sign_up.dart';
+import 'package:todo/presentation/home/pages/home.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
@@ -27,8 +29,7 @@ class GetStartedPage extends StatelessWidget {
                  alignment: Alignment.bottomRight,
                  child: IconButton(
                    onPressed: () {
-                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>SignInPage()));
+                     navigateToNextScreen(context);
                    },
                    icon: const Icon(
                      Icons.arrow_forward_sharp,
@@ -73,5 +74,17 @@ class GetStartedPage extends StatelessWidget {
        ],
      ),
     );
+  }
+
+  void navigateToNextScreen(BuildContext context)async{
+    bool? islogin=await UserPrefrences().getLoginKey();
+    if(islogin==true){
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_)=>HomePage()));
+    }
+    else{
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_)=> SignInPage()));
+    }
   }
 }
