@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/configs/assets/app_images.dart';
+import 'package:todo/presentation/auth/pages/sign_in.dart';
 import 'package:todo/presentation/auth/pages/sign_up.dart';
 
 class GetStartedPage extends StatelessWidget {
@@ -27,7 +28,7 @@ class GetStartedPage extends StatelessWidget {
                  child: IconButton(
                    onPressed: () {
                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>const SignUpPage()));
+                        MaterialPageRoute(builder: (context)=>SignInPage()));
                    },
                    icon: const Icon(
                      Icons.arrow_forward_sharp,
@@ -59,7 +60,7 @@ class GetStartedPage extends StatelessWidget {
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    SizedBox(height: 30,),
-                   Text("Get things done",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
+                   Text("Get things done",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color:  Color(0xff2a3748)),),
                    SizedBox(height: 5,),
                    Text("Just a click away from\nplanning your tasks",style: TextStyle(fontSize: 18,color: Colors.grey),),
                    Icon(Icons.more_horiz_sharp,size: 60,color: Colors.grey,),

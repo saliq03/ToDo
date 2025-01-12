@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo/presentation/get_started/pages/get_started.dart';
 
+import 'core/configs/theme/app_theme.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,10 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ToDo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
       home: const GetStartedPage(),
     );
   }
