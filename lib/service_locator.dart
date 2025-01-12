@@ -1,6 +1,7 @@
 
 import 'package:get_it/get_it.dart';
 import 'package:todo/business/repository/task/task.dart';
+import 'package:todo/business/usecase/Task/save_task.dart';
 import 'package:todo/data/repository/task/task.dart';
 import 'package:todo/data/sources/tasks/tasks_firebase_service.dart';
 
@@ -30,6 +31,8 @@ Future<void> initializeDependencies()async{
       TasksFirebaseServiceImpl());
   sL.registerSingleton<TaskRepository>(
     TaskRepositoryImpl());
+  sL.registerSingleton<SaveTaskUseCase>(
+    SaveTaskUseCase());
 
 
 }

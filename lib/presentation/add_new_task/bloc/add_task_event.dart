@@ -26,3 +26,11 @@ class ChangePriority extends AddTaskEvent{
   @override
   List<Object?> get props => [priority];
 }
+class SaveTask extends AddTaskEvent{
+  final String title,description;
+ final BuildContext context;
+  SaveTask({required this.title, required this.description,required this.context});
+  @override
+  List<Object?> get props => [title,description,context];
+
+}

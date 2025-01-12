@@ -6,9 +6,9 @@ class TaskModel{
   final String id;
   final String title;
   final String description;
-  final DateTime date;
-  final TimeOfDay time;
-  final Priority priority;
+  final String date;
+  final String time;
+  final String priority;
 
   TaskModel({
     required this.id,

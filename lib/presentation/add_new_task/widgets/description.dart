@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({super.key});
-
+  DescriptionWidget({super.key, required this.controller});
+  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,9 +17,8 @@ class DescriptionWidget extends StatelessWidget {
            borderRadius: BorderRadius.circular(25)
          ),
           child: TextFormField(
-
+          controller: controller,
             maxLines: 6 ,
-            // onSaved: (value) => _description = value ?? '',
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Enter description';

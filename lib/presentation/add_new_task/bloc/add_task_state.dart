@@ -1,29 +1,26 @@
 part of 'add_task_bloc.dart';
 
 class AddTaskState extends Equatable{
-  final String title;
-  final String description;
    DateTime?  date;
    TimeOfDay? time;
   final Priority priority;
+  final Status status;
 
   AddTaskState({
-    this.title='',
-    this.description='',
+    this.status=Status.initial,
     this.date,
     this.time,
     this.priority=Priority.low});
-  AddTaskState copyWith({String? title, String? description,DateTime?  date,TimeOfDay? time, Priority? priority}){
+  AddTaskState copyWith({DateTime?  date,TimeOfDay? time, Priority? priority, Status? status}){
     return AddTaskState(
-      title: title?? this.title,
-      description: description?? this.description,
       date: date?? this.date,
       time: time?? this.time,
-      priority: priority?? this.priority
+      priority: priority?? this.priority,
+      status: status?? this.status
     );
   }
 
   @override
-  List<Object?> get props => [title,description,date,time,priority];
+  List<Object?> get props => [date,time,priority,status];
 
 }
