@@ -20,7 +20,7 @@ class ChangeTime extends AddTaskEvent{
   List<Object?> get props => [time];
 }
 class ChangePriority extends AddTaskEvent{
-  final Priority priority;
+  final String priority;
   ChangePriority({required this.priority});
 
   @override

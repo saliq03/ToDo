@@ -3,7 +3,7 @@ part of 'add_task_bloc.dart';
 class AddTaskState extends Equatable{
    DateTime?  date;
    TimeOfDay? time;
-  final Priority priority;
+  final String priority;
   final Status status;
 
   AddTaskState({
@@ -11,7 +11,7 @@ class AddTaskState extends Equatable{
     this.date,
     this.time,
     this.priority=Priority.low});
-  AddTaskState copyWith({DateTime?  date,TimeOfDay? time, Priority? priority, Status? status}){
+  AddTaskState copyWith({DateTime?  date,TimeOfDay? time, String? priority, Status? status}){
     return AddTaskState(
       date: date?? this.date,
       time: time?? this.time,

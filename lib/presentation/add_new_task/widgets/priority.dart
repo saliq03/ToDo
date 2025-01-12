@@ -8,7 +8,7 @@ import '../../../core/configs/constants/priority.dart';
 
 class PriorityWidget extends StatelessWidget {
   const PriorityWidget({super.key, required this.selectedValue});
-final Priority selectedValue;
+final String selectedValue;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +28,7 @@ final Priority selectedValue;
                     value: Priority.medium,
                     child: Text("Medium")),
                 DropdownMenuItem(
-                    value: Priority.high,
+                    value:Priority.high,
                     child: Text("High"))
               ],
               onChanged: (value){
