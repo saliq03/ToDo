@@ -16,4 +16,14 @@ class TaskRepositoryImpl extends TaskRepository{
     return await sL<TasksFirebaseService>().fetchTasks();
   }
 
+  @override
+  Future<void> deleteTask(String taskId) async {
+    await sL<TasksFirebaseService>().deleteTask(taskId);
+  }
+
+  @override
+  Future<void> updateTask(TaskModel task) async {
+    await sL<TasksFirebaseService>().updateTask(task);
+  }
+
 }

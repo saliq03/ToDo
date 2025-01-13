@@ -3,11 +3,13 @@ import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:todo/business/usecase/Task/delete_task.dart';
 import 'package:todo/business/usecase/Task/fetch_task.dart';
 
 import 'package:todo/data/models/task.dart';
 import 'package:todo/service_locator.dart';
 
+import '../../../business/usecase/Task/update_task.dart';
 import '../../../core/configs/constants/status.dart';
 
 part 'home_event.dart';
@@ -22,6 +24,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final List<TaskModel> other = [];
   HomeBloc() : super(HomeState()) {
   on<FetchTasks>(_fetchTasks);
+  on<SelectAndUnselectTask>(_selectAndUnselectTask);
+  on<DeleteTask>(_deleteTask);
   }
 
   Future<void> _fetchTasks(FetchTasks event, Emitter<HomeState> emit) async {
@@ -42,11 +46,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final List<TaskModel> thisWeek = [];
         final List<TaskModel> thisMonth = [];
         final List<TaskModel> other = [];
+        final List<TaskModel> missed = [];
+        final List<TaskModel> completed = [];
+
 
         for (var item in data) {
           final itemDateTime = _parseDateTime(item.date, item.time);
           if (itemDateTime != null) {
-            if (_isToday(now, itemDateTime)) {
+            if (item.isDone) {
+              completed.add(item); // Add to completed if isDone is true
+            } else if (itemDateTime.isBefore(now)) {
+              missed.add(item); // Add to missed if time has already passed
+            } else if (_isToday(now, itemDateTime)) {
               today.add(item);
             } else if (_isTomorrow(now, itemDateTime)) {
               tomorrow.add(item);
@@ -66,6 +77,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           thisWeek: thisWeek,
           thisMonth: thisMonth,
           other: other,
+          completed: completed,
+          missed: missed,
           status: Status.sucess,
         ));
       }
@@ -75,6 +88,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
+  Future<void> _selectAndUnselectTask(SelectAndUnselectTask event,Emitter<HomeState> emit) async {
+    TaskModel task=TaskModel(
+        id: event.taskModel.id,
+        title: event.taskModel.title,
+        description: event.taskModel.description,
+        date: event.taskModel.date,
+        time: event.taskModel.time,
+        priority: event.taskModel.priority,
+        isDone: !event.taskModel.isDone);
+    await sL<UpdateTaskUseCase>().call(params: task);
+  }
+  Future<void> _deleteTask(DeleteTask event,Emitter<HomeState> emit) async {
+
+    await sL<DeleteTaskUseCase>().call(params: event.id);
+  }
 
 
   DateTime? _parseDateTime(String date, String time) {

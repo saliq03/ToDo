@@ -16,14 +16,17 @@ class DayTasksWiget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
        Text(title,style: const TextStyle(fontSize:22,fontWeight: FontWeight.bold),),
+        const SizedBox(height: 10,),
         ListView.separated(
+            padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context,index){
               return TaskWidget(task: list[index],);
             },
             separatorBuilder: (context,index)=>SizedBox(height: 10,),
-            itemCount: list.length)
+            itemCount: list.length),
+        const SizedBox(height: 20,),
       ],
     );
   }

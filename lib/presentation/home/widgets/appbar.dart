@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo/data/sources/user_prefrence/user_prefrence.dart';
+import 'package:todo/presentation/auth/pages/sign_in.dart';
 
 import '../../../core/configs/colors/app_colors.dart';
 
@@ -16,7 +18,7 @@ class AppbarWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Icon(Icons.gif_box,size: 40,),
+            Icon(Icons.grid_view_outlined,size: 40,color: Colors.white70,),
             const SizedBox(width: 20,),
             Expanded(
               child: TextField(
@@ -34,13 +36,30 @@ class AppbarWidget extends StatelessWidget {
                   color: Colors.lightBlue.shade300,
                   shape: BoxShape.circle
               ),
-              child: const Icon(Icons.more_horiz_sharp,size: 30,color: Colors.white,),
+              child:PopupMenuButton(
+                icon: const Icon(Icons.more_horiz_sharp,size: 30,color: Colors.white,),
+                  onSelected: (value){
+                    if(value=='logout'){
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_)=>SignInPage()));
+                       UserPrefrences().removeUser();
+                    }
+                  },
+                  itemBuilder:  (context)=>[
+                const PopupMenuItem(
+                  value: 'logout',
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text('Log out'),
+                  ),
+                ),
+              ])
             )
 
           ],),
           const SizedBox(height: 10,),
           Text(" Today, ${currentDate.day} ${convertMonth(currentDate.month)}",style: TextStyle(color:Colors.white,fontSize: 18),),
-          Text(" My Tasks",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
+          const Text(" My Tasks",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
         ],
       ),
     );

@@ -1,8 +1,10 @@
 
 import 'package:get_it/get_it.dart';
 import 'package:todo/business/repository/task/task.dart';
+import 'package:todo/business/usecase/Task/delete_task.dart';
 import 'package:todo/business/usecase/Task/fetch_task.dart';
 import 'package:todo/business/usecase/Task/save_task.dart';
+import 'package:todo/business/usecase/Task/update_task.dart';
 import 'package:todo/data/repository/task/task.dart';
 import 'package:todo/data/sources/tasks/tasks_firebase_service.dart';
 
@@ -36,6 +38,9 @@ Future<void> initializeDependencies()async{
     SaveTaskUseCase());
    sL.registerSingleton<FetchTaskUseCase>(
      FetchTaskUseCase());
-
+   sL.registerSingleton<DeleteTaskUseCase>(
+     DeleteTaskUseCase());
+   sL.registerSingleton<UpdateTaskUseCase>(
+     UpdateTaskUseCase());
 
 }

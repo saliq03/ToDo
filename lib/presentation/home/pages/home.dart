@@ -6,6 +6,7 @@ import 'package:todo/core/configs/constants/status.dart';
 import 'package:todo/presentation/add_new_task/pages/add_new_task.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
 import 'package:todo/presentation/home/widgets/appbar.dart';
+import 'package:todo/presentation/home/widgets/missed_task.dart';
 import 'package:todo/presentation/home/widgets/task.dart';
 import 'package:todo/presentation/home/widgets/day_tasks.dart';
 
@@ -51,13 +52,12 @@ class _HomePageState extends State<HomePage> {
                      child: SingleChildScrollView(
                        child: Column(
                          children: [
-                          state.today.length>0? DayTasksWiget(list: state.today,title: "Today",):SizedBox.shrink(),
-                           SizedBox(height: 20,),
-                           state.tomorrow.length>0? DayTasksWiget(list: state.tomorrow,title: "Tomorrow",):SizedBox.shrink(),
-                           SizedBox(height: 20,),
-                           state.thisWeek.length>0? DayTasksWiget(list: state.thisWeek,title: "This week",):SizedBox.shrink(),
-                           SizedBox(height: 20,),
-                           state.thisMonth.length>0? DayTasksWiget(list: state.thisMonth,title: "This month",):SizedBox.shrink(),
+                          state.today.isNotEmpty? DayTasksWiget(list: state.today,title: "Today",):const SizedBox.shrink(),
+                           state.tomorrow.isNotEmpty? DayTasksWiget(list: state.tomorrow,title: "Tomorrow",):const SizedBox.shrink(),
+                           state.thisWeek.isNotEmpty? DayTasksWiget(list: state.thisWeek,title: "This week",):const SizedBox.shrink(),
+                           state.thisMonth.isNotEmpty? DayTasksWiget(list: state.thisMonth,title: "This month",):const SizedBox.shrink(),
+                           state.completed.isNotEmpty? DayTasksWiget(list: state.completed,title: "Completed",):const SizedBox.shrink(),
+                           state.missed.isNotEmpty? MissedTasksWiget(list: state.missed):const SizedBox.shrink(),
 
 
 

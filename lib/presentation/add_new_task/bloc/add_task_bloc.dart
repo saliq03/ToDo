@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
 import 'package:todo/business/usecase/Task/save_task.dart';
+import 'package:todo/business/usecase/Task/update_task.dart';
 import 'package:todo/core/configs/constants/priority.dart';
 import 'package:todo/data/models/task.dart';
 import 'package:todo/service_locator.dart';
@@ -43,7 +44,8 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
         description: event.description,
         date: "${date.day}/${date.month}/${date.year}",
         time: time.format(event.context).toString(),
-        priority: state.priority, isDone: false);
+        priority: state.priority,
+        isDone: false);
 
     var result= await sL<SaveTaskUseCase>().call(
       params: task);
@@ -62,6 +64,8 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
       emit(state.copyWith(status: Status.sucess));
     });
   }
+
+
 
 }
 
