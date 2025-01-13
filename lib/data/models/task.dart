@@ -9,6 +9,7 @@ class TaskModel{
   final String date;
   final String time;
   final String priority;
+  final bool isDone;
 
   TaskModel({
     required this.id,
@@ -16,7 +17,8 @@ class TaskModel{
     required this.description,
     required this.date,
     required this.time,
-    required this.priority,}
+    required this.priority,
+    required this.isDone }
   );
 
   factory TaskModel.fromJson(Map<String, dynamic> json){
@@ -26,7 +28,8 @@ class TaskModel{
         description: json['description'],
         date:json['date'],
         time: json['time'],
-        priority: json['priority'], );
+        priority: json['priority'],
+       isDone: json['isDone']);
   }
 
   Map<String,dynamic> toJson(){
@@ -36,7 +39,8 @@ class TaskModel{
       'description':description,
       'date':date,
       'time':time,
-      'priority':priority
+      'priority':priority,
+      'isDone':isDone
 
     };
   }

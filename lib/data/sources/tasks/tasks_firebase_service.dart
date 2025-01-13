@@ -5,6 +5,7 @@ import 'package:todo/data/sources/user_prefrence/user_prefrence.dart';
 
 abstract class TasksFirebaseService {
   Future<Either> UploadTask(TaskModel task);
+  Future<Stream<List<TaskModel>>?>  fetchTasks();
 }
 
 class TasksFirebaseServiceImpl extends TasksFirebaseService{
@@ -24,5 +25,25 @@ class TasksFirebaseServiceImpl extends TasksFirebaseService{
       return Left('Something went wrong\n $e');
       }
     }
+
+  @override
+  Future<Stream<List<TaskModel>>?> fetchTasks() async {
+    String? email = await UserPrefrences().getUser();
+    try {
+      return FirebaseFirestore.instance.collection('Users')
+          .doc(email)
+          .collection('Tasks')
+          .snapshots().map(
+            (snapshot) {
+          return snapshot.docs.map((doc) {
+            final data = doc.data();
+            return TaskModel.fromJson(data);
+          }).toList();
+        },
+      );
+    }catch(e){
+      return null;
+    }
+  }
   }
 

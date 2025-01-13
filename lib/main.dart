@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:todo/presentation/add_new_task/bloc/add_task_bloc.dart';
 import 'package:todo/presentation/get_started/pages/get_started.dart';
+import 'package:todo/presentation/home/bloc/home_bloc.dart';
 import 'package:todo/service_locator.dart';
 
 import 'core/configs/theme/app_theme.dart';
@@ -24,8 +25,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AddTaskBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => AddTaskBloc(),
+        ),
+        BlocProvider(
+          create: (_) => HomeBloc(),
+        ),
+      ],
       child: MaterialApp(
         title: 'ToDo',
         debugShowCheckedModeBanner: false,

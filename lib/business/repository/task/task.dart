@@ -3,4 +3,5 @@ import 'package:todo/data/models/task.dart';
 
 abstract class TaskRepository{
   Future<Either> AddTask(TaskModel task);
+  Future<Stream<List<TaskModel>>?>  fetchTasks();
 }

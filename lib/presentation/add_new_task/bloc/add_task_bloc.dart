@@ -43,7 +43,7 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
         description: event.description,
         date: "${date.day}/${date.month}/${date.year}",
         time: time.format(event.context).toString(),
-        priority: state.priority);
+        priority: state.priority, isDone: false);
 
     var result= await sL<SaveTaskUseCase>().call(
       params: task);

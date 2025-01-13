@@ -11,4 +11,9 @@ class TaskRepositoryImpl extends TaskRepository{
     return await sL<TasksFirebaseService>().UploadTask(task);
   }
 
+  @override
+  Future<Stream<List<TaskModel>>?> fetchTasks() async{
+    return await sL<TasksFirebaseService>().fetchTasks();
+  }
+
 }
