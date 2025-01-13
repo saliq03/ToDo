@@ -9,58 +9,60 @@ class AppbarWidget extends StatelessWidget {
   final DateTime currentDate=DateTime.now();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 16,right: 16,top: 50,bottom: 10),
-      color: AppColors.primary,
-
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            Icon(Icons.grid_view_outlined,size: 40,color: Colors.white70,),
-            const SizedBox(width: 20,),
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
-                    prefixIcon: Icon(Icons.search_sharp,color: Colors.grey,)
-                ),
-
-              ),
-            ),
-            const SizedBox(width: 20,),
-            Container(
-              width: 50,height: 50,
-              decoration: BoxDecoration(
-                  color: Colors.lightBlue.shade300,
-                  shape: BoxShape.circle
-              ),
-              child:PopupMenuButton(
-                icon: const Icon(Icons.more_horiz_sharp,size: 30,color: Colors.white,),
-                  onSelected: (value){
-                    if(value=='logout'){
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (_)=>SignInPage()));
-                       UserPrefrences().removeUser();
-                    }
-                  },
-                  itemBuilder:  (context)=>[
-                const PopupMenuItem(
-                  value: 'logout',
-                  child: ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text('Log out'),
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.only(left: 16,right: 16,top: 50,bottom: 10),
+        color: AppColors.primary,
+      
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Icon(Icons.grid_view_outlined,size: 40,color: Colors.white70,),
+              const SizedBox(width: 20,),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                      prefixIcon: Icon(Icons.search_sharp,color: Colors.grey,)
                   ),
+      
                 ),
-              ])
-            )
-
-          ],),
-          const SizedBox(height: 10,),
-          Text(" Today, ${currentDate.day} ${convertMonth(currentDate.month)}",style: TextStyle(color:Colors.white,fontSize: 18),),
-          const Text(" My Tasks",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
-        ],
+              ),
+              const SizedBox(width: 20,),
+              Container(
+                width: 50,height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.lightBlue.shade300,
+                    shape: BoxShape.circle
+                ),
+                child:PopupMenuButton(
+                  icon: const Icon(Icons.more_horiz_sharp,size: 30,color: Colors.white,),
+                    onSelected: (value){
+                      if(value=='logout'){
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (_)=>SignInPage()));
+                         UserPrefrences().removeUser();
+                      }
+                    },
+                    itemBuilder:  (context)=>[
+                  const PopupMenuItem(
+                    value: 'logout',
+                    child: ListTile(
+                      leading: Icon(Icons.logout),
+                      title: Text('Log out'),
+                    ),
+                  ),
+                ])
+              )
+      
+            ],),
+            const SizedBox(height: 10,),
+            Text(" Today, ${currentDate.day} ${convertMonth(currentDate.month)}",style: TextStyle(color:Colors.white,fontSize: 18),),
+            const Text(" My Tasks",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
+          ],
+        ),
       ),
     );
   }

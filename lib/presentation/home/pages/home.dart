@@ -37,37 +37,37 @@ class _HomePageState extends State<HomePage> {
             AppbarWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                 if(state.status ==Status.loading){
-                   return const Center(child: CircularProgressIndicator());
-                 }
-                 else if(state.status==Status.error){
-                   return const Center(child: Text("Something went wrong"));
-                 }
-                 else{
-                   return Container(
-
-                     height: MediaQuery.of(context).size.height*0.69,
-                     child: SingleChildScrollView(
-                       child: Column(
-                         children: [
-                          state.today.isNotEmpty? DayTasksWiget(list: state.today,title: "Today",):const SizedBox.shrink(),
-                           state.tomorrow.isNotEmpty? DayTasksWiget(list: state.tomorrow,title: "Tomorrow",):const SizedBox.shrink(),
-                           state.thisWeek.isNotEmpty? DayTasksWiget(list: state.thisWeek,title: "This week",):const SizedBox.shrink(),
-                           state.thisMonth.isNotEmpty? DayTasksWiget(list: state.thisMonth,title: "This month",):const SizedBox.shrink(),
-                           state.completed.isNotEmpty? DayTasksWiget(list: state.completed,title: "Completed",):const SizedBox.shrink(),
-                           state.missed.isNotEmpty? MissedTasksWiget(list: state.missed):const SizedBox.shrink(),
-
+              child: Container(
+                height: MediaQuery.of(context).size.height*0.7,
+                child: BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                   if(state.status ==Status.loading){
+                     return const Center(child: CircularProgressIndicator());
+                   }
+                   else if(state.status==Status.error){
+                     return const Center(child: Text("Something went wrong"));
+                   }
+                   else{
+                     return  SingleChildScrollView(
+                         child: Column(
+                           children: [
+                            state.today.isNotEmpty? DayTasksWiget(list: state.today,title: "Today",):const SizedBox.shrink(),
+                             state.tomorrow.isNotEmpty? DayTasksWiget(list: state.tomorrow,title: "Tomorrow",):const SizedBox.shrink(),
+                             state.thisWeek.isNotEmpty? DayTasksWiget(list: state.thisWeek,title: "This week",):const SizedBox.shrink(),
+                             state.thisMonth.isNotEmpty? DayTasksWiget(list: state.thisMonth,title: "This month",):const SizedBox.shrink(),
+                             state.completed.isNotEmpty? DayTasksWiget(list: state.completed,title: "Completed",):const SizedBox.shrink(),
+                             state.missed.isNotEmpty? MissedTasksWiget(list: state.missed):const SizedBox.shrink(),
 
 
-                         ],
-                       ),
-                     ),
-                   );
 
-                 }
-                },
+                           ],
+                         ),
+
+                     );
+
+                   }
+                  },
+                ),
               ),
             )
 
